@@ -1,0 +1,17 @@
+42
+##start
+A 0 0
+B 0 0
+C 0 0
+D 0 0
+E 0 0
+F 0 0
+##end
+G 0 0
+A-B
+A-C
+A-E
+B-D
+B-F
+C-G
+E-F
