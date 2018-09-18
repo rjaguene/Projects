@@ -6,7 +6,7 @@
 /*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 16:46:39 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/09/17 18:20:56 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/09/18 17:38:59 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,36 @@ int        *init(int *path, int tmp, int *b)
     return (path);
 }
 
-void            print(char *s, int *path)
+void            print(t_env *env, int *path, t_link *lst)
 {
     int i;
-
+    t_link *ls;
+    t_link *tmp;
     i = 0;
-    while (s[i])
+
+    ls = NULL;
+    tmp = lst;
+    while (lst)
     {
-        if (s[i] == 1)
+        tmp = new_link(0,0);
+        ls = add_link_front(ls, tmp);
+        tmp = NULL;
+        lst = lst->next;    
+    }
+    while (lst)
+    {
+        if (lst->visit == 1)
         {
             ft_putchar('L');
-           // ft_putnbr(lst->ant);
+            ft_putnbr(lst->id_ant);
             ft_putchar('-');
-            //ft_putstr(lst->name);
+            ft_putstr(lst->name);
             ft_putchar(' ');
-            ft_putchar('\n');
         }
+        lst = lst->next;
+        i++;
     }
+    ft_putchar('\n');
 }
 
 void		   print_ants(t_env *env, int *path)
@@ -71,10 +84,12 @@ void		   print_ants(t_env *env, int *path)
     int         turn;
     t_link      *lst;
     t_link      *tmp;
+    t_link      *save;
     int         *tab_tmp;
 
     tmp = NULL;
     lst = NULL;
+    save = NULL;
     turn = 0;
 	a = 1;
 	i = 0;
@@ -82,36 +97,80 @@ void		   print_ants(t_env *env, int *path)
 	//ants = env->total_ants;
     path = init(path, 0, &i);
     printf("i = %d\n",ants);
-    tmp = new_link(0, 
+    /*tmp = new_link(0, 
         node_getname_byid(GRAPH.lst_nodes, path[0]));
-        lst = add_link_front(lst, tmp);
+        lst = add_link_end(lst, tmp);
         lst->visit = 1;
-        tmp = NULL;
+        tmp = NULL;*/
     while (path[a] != -1)
     {
         tmp = new_link(0, 
         node_getname_byid(GRAPH.lst_nodes, path[a]));
-        lst = add_link_front(lst, tmp);
+        lst = add_link_end(lst, tmp);
         tmp = NULL;
         a++;
     }
-    tmp = lst; 
+    tmp = lst;
+    //tmp->visit = 1; 
     while (tmp)
     {
      //   printf("ant nb = %d  ",tmp->id);
-        printf("\nvisited : %d %s\n",tmp->visit, tmp->name);
+        printf("\nvisited : %d %s\n",tmp->visit, tmp->name);    
         tmp = tmp->next;
     }  
     tmp = lst;
-    while (ants < env->total_ants)
+//    print(env, path, lst);
+    i = 0;
+    while (ants < env->total_ants + 1)
     {
+        if (tmp->visit == 0)
+        {
+            tmp->visit = 1;
+            tmp->id_ant = ants;
+           // print(env, path, lst);
+            //tmp = tmp->next;
+        }
         while (tmp)
         {
-            while (tmp->next->visit == 0)
+            while (tmp->next && tmp->visit == 1 && tmp->next->visit == 1)
+            {
+                save = tmp;
                 tmp = tmp->next;
-            if (tmp->next->visit == 1)
-                tmp->visit
+                i = 1;
+            }
+            if (i == 1)
+            { 
+               // printf("lol");
+                if (tmp->next)
+                {
+                    tmp->next->visit = 1;
+                    tmp->next->id_ant = tmp->id_ant;
+                    save->next->id_ant = save->id_ant;
+                    save->visit = 0;
+                    tmp = lst;
+                }                
+            }
+            if (tmp->next && tmp->visit == 1 && tmp->next->visit == 0 && i == 0)
+            {
+                tmp->next->id_ant = tmp->id_ant;
+                tmp->next->visit = 1;
+                tmp->visit = 0;
+            }
+            if (!tmp->next && tmp->visit == 1 && i == 0)
+            {
+               // tmp->visit = 0;
+            }
+             i = 0;
+            if (tmp->next && i == 1)
+                tmp = tmp->next;
+            else
+                break; 
+               
         }
+        print(env, path, lst);
+        //break;
+        tmp = lst;
+        ants++;
     }     
 }
     
@@ -122,6 +181,86 @@ void		   print_ants(t_env *env, int *path)
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    while (ants < env->total_ants + 1)
+    {
+        if (tmp->visit == 0)
+        {
+            tmp->visit = 1;
+            tmp->id_ant = ants;
+            print(env, path, lst);
+            //tmp = tmp->next;
+        }
+        while (tmp)
+        {
+            if (tmp->next && tmp->visit == 1 && tmp->next->visit == 1)
+            {
+                save = tmp;
+                i = 1;
+            }
+            if (tmp->next && tmp->visit == 1 && tmp->next->visit == 0)
+            {
+                tmp->visit = 0;
+                tmp->next->visit = 1;
+                tmp->next->id_ant = tmp->id_ant;
+                if (tmp->next->next && i == 0)
+                    tmp = tmp->next->next;
+                else if (!tmp->next->next && i == 0)
+                    break ;
+                if (i == 1)
+                {
+                    tmp = save;
+                    i = 0;
+                }
+            }
+            if (tmp->next)
+              tmp = tmp->next;
+            else if (!tmp->next && tmp->visit == 1)
+            {
+                tmp->visit = 0;
+                tmp->id_ant = 0;
+                break;
+            }
+            else 
+                break;
+        }
+        print(env, path, lst);
+        tmp = lst;
+        ants++;
+    }     
+}
+    
+    
+    
+    
+    
+    
+    
+    */
     
     
     
