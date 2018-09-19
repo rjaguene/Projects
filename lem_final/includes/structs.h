@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:00:04 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/17 16:17:57 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/09/19 16:44:14 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_link
 	char			*name;
 	int				id_ant;
 	int				visit;
+	int				id_room;
 	struct s_link	*next;
 }					t_link;
 

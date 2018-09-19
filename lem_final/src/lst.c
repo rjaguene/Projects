@@ -6,7 +6,7 @@
 /*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 17:12:59 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/09/17 16:20:15 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/09/19 16:44:59 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_link		*new_link(int nb, char *name)
 	new->visit = 0;
 	new->name = ft_strdup(name);
 	new->id_ant = 0;
+	new->id_room = nb;
 	new->next = NULL; 
 	return (new);
 }
