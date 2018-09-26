@@ -6,13 +6,26 @@
 /*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 16:46:39 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/09/19 18:01:32 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:35:48 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 #include <stdio.h>
+
+static int         get_max(t_link *lst)
+{
+    int i;
+
+    i = 0;
+    while (lst->next)
+    {
+        i++;
+        lst = lst->next;
+    }
+    return (i--);
+}
 
 int        *init(int *path, int tmp, int *b)
 {
@@ -59,19 +72,61 @@ void            print(int *path, t_link *lst)
         i++;
         tmp = tmp->next;
     }
-    //exit(0);
-    tmp = lst; 
-    while (i)
+    i--;
+    tmp = lst;
+    /*while (tmp)
+    {
+        if (tmp->visit == 1)
+        {
+            ft_putchar('L');
+            ft_putnbr(tmp->id_ant);
+            ft_putchar('-');
+            ft_putstr(tmp->name);
+            ft_putchar(' ');
+        }
+        tmp = tmp->next;
+    } 
+    ft_putchar('\n');
+    return ;*/
+    
+    while (i >= 0)
+    {
+        while (a != i)
+        {
+            //if (tmp->next)
+             tmp = tmp->next;
+            a++;
+        }
+        if (a == i)
+        {
+            if (tmp->visit == 1)
+            {
+                ft_putchar('L');
+                ft_putnbr(tmp->id_ant);
+                ft_putchar('-');
+                ft_putstr(tmp->name);
+                ft_putchar(' ');
+            }
+            i--;
+            a = 0;
+            tmp = lst;
+        }
+        //a++;
+    }
+    ft_putchar('\n');
+}
+
+   /* while (i)
     {
         if (a == i)
         {
             if (lst->visit == 1)
             {
-            ft_putchar('L');
-            ft_putnbr(lst->id_ant);
-            ft_putchar('-');
-            ft_putstr(lst->name);
-            ft_putchar(' ');
+                ft_putchar('L');
+                ft_putnbr(lst->id_ant);
+                ft_putchar('-');
+                ft_putstr(lst->name);
+                ft_putchar(' ');
             }
             i--;
             a = 0;
@@ -79,30 +134,12 @@ void            print(int *path, t_link *lst)
         }
         a++;
         if (lst->next)
-        lst = lst->next;
+            lst = lst->next;
         else 
-        lst = tmp;
+            lst = tmp;
     }
-    ft_putchar('\n');
-    
+    ft_putchar('\n');*/
 
-
-   return ;
-    while (lst)
-    {
-        if (lst->visit == 1)
-        {
-            ft_putchar('L');
-            ft_putnbr(lst->id_ant);
-            ft_putchar('-');
-            ft_putstr(lst->name);
-            ft_putchar(' ');
-        }
-        lst = lst->next;
-        i++;
-    }
-    ft_putchar('\n');
-}
 
 void  rec(t_link *lst, t_link *tmp, int *path, int ants)
 {
@@ -163,59 +200,98 @@ void		   print_ants(t_env *env, int *path)
         tmp = tmp->next;
     }  
     tmp = lst;
-//    print(env, path, lst);
+    //    print(env, path, lst);
     i = 0;
+    a = 0;
     //tmp->visit = 1;
     tmp->id_ant = ants;
     tmp->visit = 1;
+    printf("first room  = %s\n",tmp->name);
 
     ants++;
-    i = 1;
+   i = get_max(lst);
+   printf("ihh = %d\n", i);
     //print(env, path,tmp );
-   // tmp = tmp->next;
-   //i = 1;
+    // tmp = tmp->next;
+    //i = 1;
     print(path,lst);
-    while (ants < nb_ants + 1)
-    {
-        if (tmp->next && tmp->next->next)
-        {
-            if (tmp->visit == 1 && tmp->next == 0)
-            {
-                tmp->visit = 0;
-                tmp->next->visit = 1;
-                tmp->next->id_ant = tmp->id_ant;
-            }
-        }
-        if (!tmp->next)
-        {
 
+
+    while (ants < env->total_ants + 1)
+    {
+        while (i >= 0)
+        {
+            while (a != i)
+            {
+                printf("a= %d i= %d\n",a ,i);
+                if (tmp->next)
+                    tmp = tmp->next;
+                a++;
+            }
+            if (tmp && tmp->next && tmp->visit == 1)
+            {
+                if (tmp->next)
+                {
+                    tmp->visit = 0;
+                    tmp->next->visit = 1;
+                    tmp->next->id_ant = tmp->id_ant;
+                }
+            }
+            a++;
+            i--;
         }
+        i = get_max(lst);
+        tmp = lst;
+        tmp->id_ant = ants++;
+        a = 0;
+        print(path, lst);
     }
 }
 
 
+    /*
+    while (ants < env->total_ants + 1)
+    {
+        while (tmp)
+        {
+            if (tmp->next && tmp->next->next)
+            {
+                if (tmp->visit == 1 && tmp->next->visit == 0)
+                {
+                    tmp->visit = 0;
+                    tmp->next->visit = 1;
+                    tmp->next->id_ant = tmp->id_ant;
+                }
+                else if (!tmp->next->next)
+                {
+                    if (tmp->visit == 1 && tmp->next->visit == 0)
+                    {
+                        tmp->visit = 0;
+                        tmp->next->visit = 1;
+                        tmp->next->id_ant = tmp->id_ant;
+                    }
+                }
+            }
+            tmp = tmp->next;
+        }
+
+        tmp = lst;
+        if (tmp->id_room == 0 && tmp->visit == 0)
+        {
+            tmp->visit = 1;
+            tmp->id_ant = ants--; 
+        }
+        print(path, lst);
+        exit (0);
+    }
 
 
 
 
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
     /*while (ants < env->total_ants + 2)
     {

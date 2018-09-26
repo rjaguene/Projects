@@ -6,7 +6,7 @@
 /*   By: akhercha <akhercha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:00:04 by akhercha          #+#    #+#             */
-/*   Updated: 2018/08/17 12:00:04 by akhercha         ###   ########.fr       */
+/*   Updated: 2018/09/26 13:51:27 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@
 # define    WHITE           \x1b[0m
 # define    RED             \x1b[31m
 
+//#define malloc(x) NULL
 #endif
