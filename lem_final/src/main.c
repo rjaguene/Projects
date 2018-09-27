@@ -6,13 +6,11 @@
 /*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 13:14:14 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/25 17:39:46 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:22:23 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-
 
 static int 			*get_path(t_env *env, int *prev)
 {
@@ -83,6 +81,6 @@ int					main(void)
 	ft_putchar('\n'); /* separation between the map & the result */
 	path = BFS(&env, 0, 0, NULL);
 	//ft_intarr_put(path, env.graph.nb_nodes);
-	print_ants(&env, path);
+	print_ants(&env, path, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:00:04 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/17 16:19:57 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/09/27 17:59:45 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,19 @@ int 			line_iscomment(char *line);
 int				line_iscommand(char *line);
 int				line_isnode(char *line);
 int				*line_isedge(t_list *list, char *line);
-void		    print_ants(t_env *env, int *path);
+void		    print_ants(t_env *env, int *path, int i);
 
 t_link		*add_link_front(t_link *list, t_link *new);
 t_link		*new_link(int nb, char *name);
 t_link		*add_link_end(t_link *s_list, t_link *new);
-
-
+t_link      *init_nd(int *path, t_link *lst, t_link *tmp, t_env *env);
+int         *init(int *path, int tmp, int *b);
+t_link		*intit_nd(int *path, t_link *lst, t_link *tmp, t_env *env);
+void		print_room(t_link *tmp);
+void		ants_moove(t_link *lst, t_link *tmp, t_env *env, int ants);
+void		print(t_link *lst, t_link *tmp, int i, int a);
+int			ft_free_lst(t_link **lst);
+int			get_max(t_link *lst);
+int			is_end(t_link *lst);
+t_link		*get_nd(t_link *lst, int i);
 #endif

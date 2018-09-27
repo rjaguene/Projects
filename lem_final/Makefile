@@ -6,13 +6,13 @@
 #    By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/17 11:59:32 by akhercha          #+#    #+#              #
-#    Updated: 2018/09/19 11:20:58 by rojaguen         ###   ########.fr        #
+#    Updated: 2018/09/27 18:15:43 by rojaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	lem-in
 
-CC			=	gcc 
+CC			=	gcc -Wall -Wextra -Werror
 FLAGS		=	
 
 LIBFTDIR	=	libft/
@@ -29,7 +29,9 @@ SRCS		=	main.c \
 					structs/node2.c \
 					structs/adjacency.c \
 					print_ant.c \
-					lst.c
+					print_ant_2.c \
+					lst.c \
+					ft_free_lst.c
 
 OBJDIR		=	bin/
 SUBDIRS		=	structs \
