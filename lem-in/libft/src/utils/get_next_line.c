@@ -3,82 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhercha <akhercha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rojaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/02 15:36:18 by akhercha          #+#    #+#             */
-/*   Updated: 2018/06/07 00:41:55 by akhercha         ###   ########.fr       */
+/*   Created: 2018/08/12 14:03:31 by rojaguen          #+#    #+#             */
+/*   Updated: 2018/10/09 16:13:11 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_isin(char *str, char c)
+int		read_from_fd_into_stock(int const fd, char **stock)
 {
-	int		i;
+	static char		buff[BUFF_SIZE + 1] = { ENDL };
+	int				read_bytes;
+	char			*nstr;
 
-	i = 0;
-	if (!str)
-		return (-1);
-	while (str[i])
+	read_bytes = read(fd, buff, BUFF_SIZE);
+	if (read_bytes > 0)
 	{
-		if (str[i] == c)
-			return (1);
-		i++;
+		buff[read_bytes] = '\0';
+		nstr = ft_strjoin(*stock, buff);
+		if (!nstr)
+			return (-1);
+		free(*stock);
+		*stock = nstr;
 	}
-	return (0);
+	return (read_bytes);
 }
 
-static int		ft_getchar_pos(char *str, char c)
+int		clear(char **endl_index, char **stock)
 {
-	int			i;
-
-	i = 0;
-	if (!str)
-		return (-1);
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
+	*endl_index = ft_strdup(*endl_index + 1);
+	free(*stock);
+	*stock = *endl_index;
+	return (1);
 }
 
-static int		ft_addstr(char **line, char const *buff)
+int		get_next_line(int const fd, char **line)
 {
-	char	*fresh;
-	int		n;
-
-	if ((n = ft_getchar_pos((char*)buff, '\n')) < 0)
-		return (-1);
-	if (!(fresh = ft_strnew(ft_strlen(*line) + n)))
-		return (-1);
-	ft_strcpy(fresh, *line);
-	free(*line);
-	ft_strncat(fresh, buff, n);
-	ft_strcpy((char*)buff, &(buff[(buff[n] == '\n') ? (n + 1) : n]));
-	*line = fresh;
-	return (0);
-}
-
-int				get_next_line(const int fd, char **line)
-{
-	static char		buff[BUFF_SIZE + 1];
-	int				pos;
+	static char		*stock = NULL;
+	char			*endl_index;
 	int				ret;
 
-	if (fd == -1 || !line || !(*line = ft_strnew(100000)) || BUFF_SIZE <= 0)
+	if (!stock && (stock = (char *)ft_memalloc(sizeof(char))) == NULL)
 		return (-1);
-	while (1)
+	endl_index = ft_strchr(stock, ENDL);
+	while (endl_index == NULL)
 	{
-		if (!buff[0])
-			ft_bzero(buff, BUFF_SIZE + 1);
-		if (!buff[0] && (ret = read(fd, buff, BUFF_SIZE)) < 0)
+		ret = read_from_fd_into_stock(fd, &stock);
+		if (ret == 0)
+		{
+			if ((endl_index = ft_strchr(stock, '\0')) == stock)
+				return (0);
+		}
+		else if (ret < 0)
 			return (-1);
-		if (!ret && **line)
-			return (1);
-		if (!ret && !buff[0])
-			return (0);
-		if ((pos = ft_isin(buff, '\n')) < 0 ||
-				(ft_addstr(line, buff)) < 0)
-			return (-1);
-		if (pos)
-			return (1);
+		else
+			endl_index = ft_strchr(stock, ENDL);
 	}
+	*line = ft_strsub(stock, 0, endl_index - stock);
+	if (!*line)
+		return (-1);
+	return (clear(&endl_index, &stock));
 }

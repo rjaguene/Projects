@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/17 12:01:23 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/10 14:09:35 by anonymous        ###   ########.fr       */
+/*   Created: 2018/10/07 14:11:44 by rojaguen          #+#    #+#             */
+/*   Updated: 2018/10/07 14:17:06 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			env_init(t_env *env)
 	return (0);
 }
 
-int 		graph_init(t_graph *graph)
+int			graph_init(t_graph *graph)
 {
 	graph->nb_nodes = 0;
 	if (!(graph->lst_nodes = ft_lstnew(NULL, 0)))
@@ -31,10 +31,10 @@ int 		graph_init(t_graph *graph)
 	return (0);
 }
 
-int 		adjacency_init(t_graph *graph)
+int			adjacency_init(t_graph *graph)
 {
-	int 	y;
-	int 	x;
+	int		y;
+	int		x;
 
 	if (!(graph->nb_nodes > 1 && graph->id_start >= 0 && graph->id_end >= 0))
 		return (1);
@@ -53,7 +53,7 @@ int 		adjacency_init(t_graph *graph)
 	return (0);
 }
 
-void 		parser_init(t_parser *parser)
+void		parser_init(t_parser *parser)
 {
 	parser->adjacency_created = FALSE;
 	parser->next_is_start = FALSE;

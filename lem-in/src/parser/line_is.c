@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_is.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 13:14:14 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/09 17:05:04 by anonymous        ###   ########.fr       */
+/*   Updated: 2018/10/07 14:07:32 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int			line_iscommand(char *line)
 
 int			line_isnode(char *line)
 {
-	int 	i;
-	int 	pos_space;
+	int i;
+	int pos_space;
 
 	if (!line)
 		return (FALSE);
@@ -60,11 +60,11 @@ int			line_isnode(char *line)
 	return (FALSE);
 }
 
-static int 	*get_ids(t_list *lst_nodes, char *line, int i)
+static int	*get_ids(t_list *lst_nodes, char *line, int i)
 {
-	int 	*ids;
+	int		*ids;
 	char	*node_name_a;
-	char 	*node_name_b;
+	char	*node_name_b;
 
 	if (!lst_nodes || !line)
 		return (NULL);
@@ -82,8 +82,8 @@ static int 	*get_ids(t_list *lst_nodes, char *line, int i)
 
 int			*line_isedge(t_list *lst_nodes, char *line)
 {
-	int 	*ids;
-	int 	i;
+	int		*ids;
+	int		i;
 
 	if (!lst_nodes || !line)
 		return (NULL);

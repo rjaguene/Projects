@@ -6,21 +6,21 @@
 #    By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/17 11:59:32 by akhercha          #+#    #+#              #
-#    Updated: 2018/09/14 15:17:34 by rojaguen         ###   ########.fr        #
+#    Updated: 2018/10/08 17:11:25 by rojaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	lem-in
 
-CC			=	gcc 
-FLAGS		=
+CC			=	gcc -Wall -Wextra -Werror 
+FLAGS		= #-fsanitize=address -g3
 
 LIBFTDIR	=	libft/
-LIBFT		=	$(LIBFTDIR)libft.a
+LIBFT 		=	$(LIBFTDIR)libft.a
 
 SRCDIR		=	src/
 
-SRCS		=		main.c \
+SRCS		=	main.c \
 					parser/parse_stdin.c \
 					parser/line_is.c \
 					parser/line_handle.c \
@@ -28,8 +28,11 @@ SRCS		=		main.c \
 					structs/node.c \
 					structs/node2.c \
 					structs/adjacency.c \
-					solve.c \
-					get_id.c
+					print_ant.c \
+					print_ant_2.c \
+					lst.c \
+					ft_free_lst.c \
+					error.c
 
 OBJDIR		=	bin/
 SUBDIRS		=	structs \

@@ -6,17 +6,18 @@
 /*   By: akhercha <akhercha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/09 14:08:33 by akhercha          #+#    #+#             */
-/*   Updated: 2018/07/18 19:28:08 by akhercha         ###   ########.fr       */
+/*   Updated: 2018/10/07 18:56:29 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_strdel(char **as)
+int		ft_strdel(char **as)
 {
 	if (as != NULL)
 	{
 		free(*as);
 		*as = NULL;
 	}
+	return (0);
 }

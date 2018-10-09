@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelfirst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhercha <akhercha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/13 14:35:58 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/13 15:04:58 by akhercha         ###   ########.fr       */
+/*   Created: 2018/09/14 22:40:48 by akhercha          #+#    #+#             */
+/*   Updated: 2018/10/08 14:10:37 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../../includes/lem_in.h"
 
-void                ft_lstdelfirst(t_list **alst)
+void				ft_lstdelfirst(t_list **lst)
 {
-    t_list          *tmp;
+	t_list			*new_begin;
+	t_list			*save;
 
-	if (!*alst)
+	if (!*lst)
 		return ;
-    tmp = (*alst)->next;
-    free(alst);
-    *alst = tmp;
+	save = *lst;
+	new_begin = (*lst)->next;
+	*lst = new_begin;
+	free(save->content);
+	free(save);
 }

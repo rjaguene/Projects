@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   line_handle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anonymous <anonymous@student.42.fr>        +#+  +:+       +#+        */
+/*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/06 13:14:14 by akhercha          #+#    #+#             */
-/*   Updated: 2018/09/09 17:05:22 by anonymous        ###   ########.fr       */
+/*   Updated: 2018/10/08 17:08:54 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static int		handle_command(t_parser *parser, int command_code)
+static int			handle_command(t_parser *parser, int command_code)
 {
 	if (command_code <= 0)
 		return (1);
@@ -29,7 +29,7 @@ static int		handle_command(t_parser *parser, int command_code)
 	return (0);
 }
 
-static int		handle_node(t_env *env, t_parser *parser, char *line,
+static int			handle_node(t_env *env, t_parser *parser, char *line,
 	int pos_space)
 {
 	char		*node_name;
@@ -51,29 +51,36 @@ static int		handle_node(t_env *env, t_parser *parser, char *line,
 			parser->next_is_end = FALSE;
 		}
 	}
+	else
+		return (ft_strdel(&node_name));
 	ft_strdel(&node_name);
 	return (existing_id == -1 ? 0 : 1);
 }
 
-static int		handle_edge(t_graph *graph, int **ids)
+static int			handle_edge(t_graph *graph, int **ids)
 {
 	if (!ids)
 		return (1);
+	graph->check = 1;
 	adjacency_new_edge(graph, (*ids)[0], (*ids)[1]);
 	free(*ids);
 	*ids = NULL;
 	return (0);
 }
 
-int 			line_handle(t_env *env, t_parser *parser, char *line)
+int					line_handle(t_env *env, t_parser *parser, char *line)
 {
-	int 		*ids;
-	int 		ret;
+	int		*ids;
+	int		ret;
 
 	if (line_iscomment(line))
+	{
 		return (0);
+	}
 	else if ((ret = line_iscommand(line)) > 0)
+	{
 		return (handle_command(parser, ret));
+	}
 	else if ((ret = line_isnode(line)) > 0)
 		return (handle_node(env, parser, line, ret));
 	else if (!parser->adjacency_created)

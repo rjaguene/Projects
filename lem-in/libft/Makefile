@@ -6,7 +6,7 @@
 #    By: akhercha <akhercha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/17 12:01:55 by akhercha          #+#    #+#              #
-#    Updated: 2018/09/13 14:40:30 by akhercha         ###   ########.fr        #
+#    Updated: 2018/09/14 22:41:49 by akhercha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS	=	is/ft_isalnum.c \
 				lst/ft_lstat.c \
 				lst/ft_lstdel.c \
 				lst/ft_lstdelone.c \
+				lst/ft_lstdelfirst.c \
 				lst/ft_lstfind.c \
 				lst/ft_lstiter.c \
 				lst/ft_lstlast.c \
@@ -41,7 +42,6 @@ SRCS	=	is/ft_isalnum.c \
 				lst/ft_lstnew.c \
 				lst/ft_lstsize.c \
 				lst/ft_lststrput.c \
-				lst/ft_lstdelfirst.c \
 				mem/ft_bzero.c \
 				mem/ft_memalloc.c \
 				mem/ft_memchr.c \
@@ -116,6 +116,7 @@ SRCS	=	is/ft_isalnum.c \
 				array/ft_intarr_reverse_shift.c \
 				array/ft_intarr_put.c \
 				array/ft_intarr_hasduplicates.c \
+				array/ft_intarr_init.c \
 				stack/ft_stack_add.c \
 				stack/ft_stack_new.c \
 				stack/ft_stack_push.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_prototypes.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhercha <akhercha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 12:00:58 by akhercha          #+#    #+#             */
-/*   Updated: 2018/08/17 12:00:58 by akhercha         ###   ########.fr       */
+/*   Updated: 2018/10/08 14:18:12 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,12 @@ int					ft_isascii(int c);
 int					ft_ischarset(int c, char *charset);
 int					ft_isdigit(int c);
 int					ft_isnumber(char *str);
-int 				ft_isinteger(char *str);
+int					ft_isinteger(char *str);
 int					ft_islower(int c);
 int					ft_isprint(int c);
 int					ft_isupper(int c);
 int					ft_iswhitespace(int c);
 int					ft_is_char_in(char *str, char c);
-
 void				ft_bzero(void *s, size_t n);
 void				*ft_memalloc(size_t size);
 void				*ft_memchr(const void *s, int c, size_t n);
@@ -72,7 +71,7 @@ char				*ft_strchr(const char *s, int c);
 void				ft_strclr(char *s);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strcpy(char *dest, const char *src);
-void				ft_strdel(char **as);
+int					ft_strdel(char **as);
 char				*ft_strdup(const char *src);
 int					ft_strequ(char const *s1, char const *s2);
 void				ft_striter(char *s, void (*f)(char *));
@@ -101,7 +100,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 t_list				*ft_lstat(t_list *begin_list, unsigned int nbr);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void                ft_lstdelfirst(t_list **alst);
+void				ft_lstdelfirst(t_list **lst);
 t_list				*ft_lstfind(t_list *begin_list,
 	void *content_ref, int (*cmp)());
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
@@ -122,8 +121,8 @@ int					ft_stack_issort(t_stack *stack);
 int					ft_stack_isempty(t_stack *stack);
 int					ft_stack_hasduplicates(t_stack *stack);
 int					ft_stack_find(t_stack *stack, int to_find);
-int 				ft_stack_top(t_stack *stack);
-int 				ft_stack_min(t_stack *stack);
+int					ft_stack_top(t_stack *stack);
+int					ft_stack_min(t_stack *stack);
 int					ft_stack_max(t_stack *stack);
 
 void				ft_swap(int *a, int *b);
@@ -139,5 +138,6 @@ void				ft_intarr_shift(int *arr, int len);
 void				ft_intarr_reverse_shift(int *arr, int len);
 void				ft_intarr_put(int *arr, int len);
 int					ft_intarr_hasduplicates(int *arr, int len);
+void				ft_intarr_init(int *arr, int len, int value);
 
 #endif
