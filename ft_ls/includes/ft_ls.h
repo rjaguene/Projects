@@ -6,7 +6,7 @@
 /*   By: rojaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:25:05 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/10/13 17:17:33 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/10/25 18:45:05 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,20 @@ typedef struct	s_pars
 
 }				t_pars;
 
+typedef struct		s_file
+{
+	char				*name;
+	unsigned char		*d_type;
+	struct s_file	*next;
+}					t_file;
+
 typedef	struct s_env
 {
 	t_pars		pars;
 }				t_env;
 
 int				init(t_env **env, int argc, char **argv);
+t_file			*new_node();
+t_file			*add_link(t_file *lst, t_file *new);
+int				lst_is_sort(t_file *lst);
 #endif

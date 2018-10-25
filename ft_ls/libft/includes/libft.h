@@ -6,7 +6,7 @@
 /*   By: rojaguen <rojaguen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 20:14:57 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/08/10 15:33:11 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/10/25 18:45:02 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int					ft_atoi(const char *str);
 char				*ft_strstr(const char *haystack, const char *needle);
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
+unsigned char		*ft_unsigned_dup(unsigned char *s1);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strncpy(char *dst, const char *src, size_t len);
 char				*ft_strcat(char *s1, const char *s2);

@@ -5,15 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rojaguen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/10/12 15:28:57 by rojaguen          #+#    #+#              #
-#    Updated: 2018/10/13 17:38:42 by rojaguen         ###   ########.fr        #
+#    Created: 2018/10/24 15:24:39 by rojaguen          #+#    #+#              #
+#    Updated: 2018/10/25 15:59:10 by rojaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	ft_ls
 
 CC			=	gcc #-Wall -Wextra -Werror 
-FLAGS		= #-fsanitize=address -g3
+FLAGS		= #-fsanitize=address -g3  -fsanitize-address-use-after-scope \
+			  #  -fno-o					mit-frame-pointer\
+			  #  #  -O1 -g -fsanitize=address\					
 
 LIBFTDIR	=	libft/
 LIBFT 		=	$(LIBFTDIR)libft.a
@@ -21,10 +23,11 @@ LIBFT 		=	$(LIBFTDIR)libft.a
 SRCDIR		=	src/
 
 SRCS		=	main.c \
-				pars.c
+				parser/pars.c \
+				lst.c
 
-OBJDIR		=	#bin/
-SUBDIRS		=	#structs \
+OBJDIR		=	bin/
+SUBDIRS		= parser	#structs \
 					parser
 
 OBJDIRS		=	$(addprefix $(OBJDIR), $(SUBDIRS))
@@ -33,9 +36,9 @@ OBJS		=	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 all: $(LIBFT) $(OBJDIR) $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "Creating the lem-in executable..."
+	@echo "Creating the ft_ls executable..."
 	@$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	@echo "LS made!"
+	@echo "ft_ls"
 
 $(LIBFT):
 	@make -C $(LIBFTDIR)
