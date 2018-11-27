@@ -6,7 +6,7 @@
 /*   By: rojaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:25:05 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/10/25 18:45:05 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/11/02 12:26:01 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,26 @@ typedef struct	s_pars
 	unsigned int a : 1;
 	unsigned int r : 1;
 	unsigned int t : 1;
-
 }				t_pars;
 
-typedef struct		s_file
+typedef struct			s_file
 {
 	char				*name;
 	unsigned char		*d_type;
-	struct s_file	*next;
-}					t_file;
+	int					id;
+	struct s_file		*next;
+	int					file;
+}						t_file;
 
-typedef	struct s_env
+typedef	struct			s_env
 {
-	t_pars		pars;
-}				t_env;
+	t_pars				pars;
+}						t_env;
 
-int				init(t_env **env, int argc, char **argv);
-t_file			*new_node();
-t_file			*add_link(t_file *lst, t_file *new);
-int				lst_is_sort(t_file *lst);
+int						init(t_env **env, int argc, char **argv);
+int						lst_is_sort(t_file *lst);
+t_file					*new_node();
+t_file					*add_link(t_file *lst, t_file *new);
+t_file					*swap2(t_file **lst, int id); //temp
+t_file					*get_prev(t_file *lst, t_file *link);
 #endif

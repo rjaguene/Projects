@@ -6,7 +6,7 @@
 /*   By: rojaguen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 14:16:06 by rojaguen          #+#    #+#             */
-/*   Updated: 2018/10/25 18:18:51 by rojaguen         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:50:01 by rojaguen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,17 @@ void	free_lst(t_file **lst)
 		*lst = (*lst)->next;
 		tmp = *lst;
 	}
+}
+
+t_file		*get_prev(t_file *lst, t_file *link)
+{
+	if (lst->id == link->id)
+		return (lst);
+	while (lst)
+	{
+		if (lst->next && lst->next->id == link->id)
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
 }

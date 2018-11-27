@@ -6,7 +6,7 @@
 #    By: rojaguen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/24 15:24:39 by rojaguen          #+#    #+#              #
-#    Updated: 2018/10/25 15:59:10 by rojaguen         ###   ########.fr        #
+#    Updated: 2018/11/07 15:48:03 by rojaguen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,6 @@ NAME		=	ft_ls
 
 CC			=	gcc #-Wall -Wextra -Werror 
 FLAGS		= #-fsanitize=address -g3  -fsanitize-address-use-after-scope \
-			  #  -fno-o					mit-frame-pointer\
-			  #  #  -O1 -g -fsanitize=address\					
 
 LIBFTDIR	=	libft/
 LIBFT 		=	$(LIBFTDIR)libft.a
@@ -24,7 +22,7 @@ SRCDIR		=	src/
 
 SRCS		=	main.c \
 				parser/pars.c \
-				lst.c
+				lst.c 
 
 OBJDIR		=	bin/
 SUBDIRS		= parser	#structs \
