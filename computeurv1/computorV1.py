@@ -1,7 +1,6 @@
 import argparse
 import re
 import sys
-import math
 
 class colors:
     blue = '\033[94m'
@@ -10,18 +9,13 @@ class colors:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
-def ft_sqrt(nb):
-    x1 = (nb * 1.0) / 2
-    x2 = (x1 + (nb / x1)) / 2
-    while (abs(x1 - x2) > 0):
-        x1 = x2
-        x2 = (x1 + (nb / x1)) / 2
-    return x2
-
 def check_incorrect_expr(abc):   
     if abc['a'] == 0 and abc['b'] == 0:
         print(colors.green +'Polynomial degree: ' + colors.ENDC + '0')
-        print('No solution')
+        if abc['c'] != 0:
+            print("No solution")
+        else:
+            print('All real numbers are solutions')
         exit()
     if abc['a'] == 0:
         print(colors.green +'Polynomial degree: ' + colors.ENDC + '1')
@@ -34,10 +28,11 @@ def print_max_degree(abc, all_degree):
     print(colors.green +'Polynomial degree: ' + colors.ENDC + str(max(all_degree)))
 
 def solve(abc, all_degree):
-    delta = pow(2, abs(abc['b'])) - (4 * abc['a'] * abc['c'])
+    delta = pow(abs(abc['b']), 2) - (4 * abc['a'] * abc['c'])
+    print(delta)
     if delta > 0:
-        x1 = (-abc['b'] + ft_sqrt(delta)) / (2 * abc['a'])
-        x2 = (-abc['b'] - ft_sqrt(delta)) / (2 * abc['a'])
+        x1 = (-abc['b'] + (delta ** 0.5)) / (2 * abc['a'])
+        x2 = (-abc['b'] - (delta ** 0.5)) / (2 * abc['a'])
         print (colors.blue + "Discriminant is strictly positive, the two solutions are:" + colors.ENDC)
         print("{}\n{}".format(x2, x1))
     elif delta == 0:
@@ -45,11 +40,11 @@ def solve(abc, all_degree):
         print (colors.blue + "Discriminant egal zero, the solution is:" + colors.ENDC)
         print("{}".format(x1))
     else:
-        x1 = (-abc['b'] + ft_sqrt(-delta)) / (2 * abc['a'])
-        x2 = (-abc['b'] - ft_sqrt(-delta)) / (2 * abc['a'])
+        real = -abc['b'] / (2 * abc['a']) 
+        ima = (abs(delta) ** 0.5) / (2 * abc['a'])
         print (colors.blue + "Discriminant is strictly negative, the two solutions are:" + colors.ENDC)
-        print("{}\n{}".format(x2, x1))
-
+        print("{} + {} * i\n{} - {} * i".format(real, ima, real, ima))
+        
 def print_reduct_form(abc):
     print(colors.green + 'Reducted Form:' + colors.ENDC),
     if abc['c'] != 0:
@@ -62,6 +57,8 @@ def print_reduct_form(abc):
         print("{}{}{}".format("+ ","%g"%abc['a'], " * X^2 = 0"))
     elif abc['a'] < 0:
         print("{}{}{}".format("- ","%g"%-abc['a'], " * X^2 = 0"))
+    elif abc['c'] == 0 and abc['a'] == 0 and abc['b'] == 0:
+        print('0 = 0')
     else:
         print('= 0')
 
@@ -132,7 +129,9 @@ def main():
     abc = get_abc(all_digit, all_degree)
     print_reduct_form(abc)
     print_max_degree(abc, all_degree)
-    solve(abc,all_degree)
-
+    try:
+        solve(abc,all_degree)
+    except:
+        print("Error")
 if __name__ == '__main__':
     main()
