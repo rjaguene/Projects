@@ -45,7 +45,7 @@ def get_datas():
     return X, Y
 
 def show_graph(a, b, x, x_scalled):
-    data = np.loadtxt("data.csv", dtype = np.longdouble)
+    data = np.loadtxt("data.csv", dtype = np.longdouble, delimiter = ',', skiprows = 1)
     y = []
     for i in range(0, len(x_scalled)):
         y.append(b + a * x_scalled[i])
